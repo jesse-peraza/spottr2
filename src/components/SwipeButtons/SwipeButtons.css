@@ -1,0 +1,14 @@
+.swipeButtons {
+    position: fixed;
+    bottom: 12vh;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    margin: auto 25vw;
+}
+
+.rounded-full {
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 1.75vw;
+}

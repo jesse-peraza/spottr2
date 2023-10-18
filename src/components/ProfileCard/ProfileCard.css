@@ -1,0 +1,28 @@
+.card {
+    position: relative;
+    background-color: white;
+    width: 32vw;
+    height: 50vh;
+    overflow: auto;
+    box-shadow: 0px 15px 50px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.profileContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.swipe {
+    position: absolute;
+}
+
+.card h1 {
+    position: absolute;
+    bottom: 0;
+    margin: 12px;
+    color: black;
+}

@@ -1,63 +1,73 @@
-import { Component } from 'react'; 
+import { useState } from 'react';
+import { signUp } from '../../utilities/users-service';
+import { Input, Button, Typography, IconButton } from '@material-tailwind/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faX } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
-import {signUp} from '../../utilities/users-service'
 
-export default class SignUpForm extends Component {
-    // class fields approach for setting the state 
-    state = {
-        name: '', 
-        email: '', 
-        password: '', 
-        confirm: '', 
-        error: ''
+export default function SignUpForm({ setUser, onClose }){
+  const [credentials, setCredentials] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm: '',
+    error: ''
+  });
+
+  const [error, setError] = useState('');
+  const navigate = useNavigate()
+  function handleChange (evt) {
+    setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
+    setError('');
+  };
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      const {name, email, password} = credentials;
+      const formData = {name, email, password};
+      // The promise returned by the signUp service
+      // method will resolve to the user object included
+      // in the payload of the JSON Web Token (JWT)
+      const user = await signUp(formData);
+      setUser(user);
+      navigate('/profile/create')
+    } catch {
+      // An error occurred
+      // Probably due to a duplicate email
+      setError('Sign Up Failed - Try Again');
     }
-    // navigate = useNavigate()
-    // 2 ways to set a method's "this" keyword correctly: JS 'bind' method in the constructor or the class fields syntax 
-    handleChange = (evt) => {
-        this.setState({
-            [evt.target.name]: evt.target.value, 
-            error: ''
-        })
-    }
+  };
 
-    handleSubmit = async (evt) => {
-        evt.preventDefault()
-        
-        try {
-            const formData = {...this.state}
-            delete formData.error
-            delete formData.confirm
+  function stopClose(evt) {
+    evt.stopPropagation();
+  };
 
-            const user = await signUp(formData)
-            // this.props.setUser(user)
-            // this.navigate('/orders')
-            this.props.setUser(user)
-        } catch {
-            this.setState({ error: 'Sign Up Failed - Try Again' })
-        }
-    }
+  const disable = credentials.password !== credentials.confirm;
 
-
-    //class based components need to have a render function instead of just returning the stuff that we want to render 
-    render () {
-        const disable = this.state.password !== this.state.confirm;
-        return (
-            <div>
-                <div className="form-container">
-                    <form autoComplete="off" onSubmit={this.handleSubmit}>
-                    <label>Name</label>
-                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-                    <label>Email</label>
-                    <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                    <label>Password</label>
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-                    <label>Confirm</label>
-                    <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-                    <button type="submit" disabled={disable}>SIGN UP</button>
-                    </form>
-                </div>
-                <p className="error-message">&nbsp;{this.state.error}</p>
-            </div>
-        )
-    }
+  return (
+    <div className="form-overlay" onClick={onClose}>
+      <div className="form-container" onClick={stopClose}>
+        <IconButton className="rounded-full close-btn" size="sm" variant="text" onClick={onClose}>
+          <FontAwesomeIcon icon={faX} style={{color: "#cc0000",}} />
+        </IconButton>
+        <Typography variant="h4" color="blue-gray">
+          Sign Up
+        </Typography>
+        <Typography color="gray" className="mt-1 font-normal">
+        Enter your details to sign up.
+        </Typography>
+        <form className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96 input-container" autoComplete="off" onSubmit={handleSubmit} onClick={stopClose}>
+          <div className="mb-5 flex flex-col gap-5">
+            <Input label="Name" type="text" name="name" value={credentials.name} onChange={handleChange} required />
+            <Input label="Email" type="email" name="email" value={credentials.email} onChange={handleChange} required />
+            <Input label="Password"type="password" name="password" value={credentials.password} onChange={handleChange} required />
+            <Input label="Confirm" type="password" name="confirm" value={credentials.confirm} onChange={handleChange} required />
+          </div>
+          <Button variant='gradient' ripple={true} type="submit" disabled={disable}>SIGN UP</Button>
+        </form>
+      </div>
+      <p className="error-message">&nbsp;{error}</p>
+    </div>
+  );
 }
