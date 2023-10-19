@@ -8,6 +8,8 @@ router.get('/', profilesCtrl.index)
 router.get('/display', profilesCtrl.displayProfiles)
 router.post('/create', profilesCtrl.create)
 router.post('/photo-upload', upload.array('photo', 4), profilesCtrl.upload)
+router.post('/like', profilesCtrl.sendLike)
+router.post('/dislike', profilesCtrl.sendDislike)
 
 // router.put('/edit', profilesCtrl.update)
 

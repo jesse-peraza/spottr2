@@ -26,8 +26,7 @@ export default function NavBar({ user, setUser }) {
           <FontAwesomeIcon icon={faComments} style={{color: "#000000",}} />
         </IconButton>
       </Link>
-      <span>Welcome, {user.name}</span>
-      &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
+      <Link to="" onClick={handleLogOut}>Log Out</Link>
     </nav>
   );
 }

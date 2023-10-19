@@ -22,6 +22,16 @@ export async function displayProfiles() {
     return sendRequest(`${BASE_URL}/display`)
 }
 
+
+export async function sendLike (id) {
+    return sendRequest(`${BASE_URL}/like`, 'POST', {id})
+}
+
+export async function sendDislike (id) {
+    return sendRequest(`${BASE_URL}/dislike`, 'POST', id)
+}
+
+
 // export function updateProfile(profileData) {
 //     return sendRequest(`${BASE_URL}/edit`, 'PUT', profileData)
 // }

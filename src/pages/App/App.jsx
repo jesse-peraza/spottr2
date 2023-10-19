@@ -11,7 +11,7 @@ import MatchPage from '../MatchPage/MatchPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  // const [profile, setProfile] = useState({})
+  const [profile, setProfile] = useState({})
 
   return (
     <main className="App">
@@ -19,7 +19,7 @@ export default function App() {
           <>
             <NavBar user={user} setUser={setUser} />
             <Routes>
-              <Route path="/" element={<HomePage user={user}/>} />
+              <Route path="/" element={<HomePage user={user} setProfile={setProfile}/>} />
               <Route path="/profile/create" element={<CreateProfilePage user={user}/>}></Route>
               <Route path="/profile" element={<ProfilePage />}></Route>
               <Route path="/matches" element={<MatchPage />}></Route>

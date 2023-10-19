@@ -7,7 +7,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { IconButton } from '@material-tailwind/react'
 
 
-export default function SwipeButtons() {
+export default function SwipeButtons({handleLike}) {
   return (
     <div className='swipeButtons'>
         <IconButton className='rounded-full' variant='outlined' ripple={true} size='lg'>
@@ -16,7 +16,7 @@ export default function SwipeButtons() {
         <IconButton className='rounded-full' variant='outlined' ripple={true} size='lg'>
             <FontAwesomeIcon icon={faXmark} style={{color: "#ff0000",}} size='xl'/>
         </IconButton>
-        <IconButton className='rounded-full' variant='outlined' ripple={true} size='lg'>
+        <IconButton className='rounded-full' variant='outlined' ripple={true} size='lg' onClick={handleLike}>
             <FontAwesomeIcon icon={faHeart} style={{color: "#00c73c",}} size='xl'/>
         </IconButton>
     </div>
