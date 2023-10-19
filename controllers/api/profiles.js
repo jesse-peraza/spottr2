@@ -8,7 +8,8 @@ module.exports = {
     upload,
     displayProfiles,
     sendLike,
-    sendDislike
+    sendDislike,
+    addMatch
 }
 
 async function index (req, res) {
@@ -83,8 +84,23 @@ async function sendLike (req, res) {
 async function sendDislike (req, res) {
     try {
         const profile = await Profile.findOne({user: req.user._id})
-        profile.dislikes.push(req.body)
+        profile.dislikes.push(req.body.id)
         await profile.save()
+        res.json(profile)
+    } catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+}
+
+async function addMatch (req, res) {
+    try {
+        const profile = await Profile.findOne({user: req.user._id})
+        profile.matches.push(req.body.id)
+        await profile.save()
+        const match = await Profile.findOne({_id: req.body.id})
+        match.matches.push(profile._id)
+        await match.save()
         res.json(profile)
     } catch (err) {
         console.log(err)

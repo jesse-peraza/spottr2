@@ -10,6 +10,7 @@ router.post('/create', profilesCtrl.create)
 router.post('/photo-upload', upload.array('photo', 4), profilesCtrl.upload)
 router.post('/like', profilesCtrl.sendLike)
 router.post('/dislike', profilesCtrl.sendDislike)
+router.post ('/match/add', profilesCtrl.addMatch)
 
 // router.put('/edit', profilesCtrl.update)
 

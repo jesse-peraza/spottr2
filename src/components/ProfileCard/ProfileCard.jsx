@@ -8,6 +8,8 @@ import SwipeButtons from '../SwipeButtons/SwipeButtons';
 export default function ProfileCard({setProfile}) {
     const [userProfiles, setUserProfiles] = useState([]);
     const [currentIdx, setCurrentIdx] = useState(0)
+    const [matched, setMatched] = useState(false)
+    const [currentMatch, setCurrentMatch] = useState({})
 
     useEffect(function() {
         async function getProfileList() {
@@ -23,12 +25,22 @@ export default function ProfileCard({setProfile}) {
         console.log(userProfiles[currentIdx]._id)
         const myProfile = await profilesAPI.sendLike(userProfiles[currentIdx]._id)
         setProfile(myProfile)
+        if (userProfiles[currentIdx].likes.includes(myProfile._id)) {
+            setMatched(true)
+            setCurrentMatch(userProfiles[currentIdx])
+            await profilesAPI.sendMatch(userProfiles[currentIdx]._id)
+            console.log(myProfile)
+        }
         setCurrentIdx(currentIdx+1)
     }
 
     async function handleDislike() {
-
+        console.log(userProfiles[currentIdx])
+        await profilesAPI.sendDislike(userProfiles[currentIdx]._id)
+        setCurrentIdx(currentIdx+1)
     }
+
+
 
 
     async function swiped (direction, nameToDelete) {
@@ -36,9 +48,9 @@ export default function ProfileCard({setProfile}) {
         if (direction === 'right') {
             handleLike()
         }
-        // if (direction === 'left') {
-
-        // }
+        if (direction === 'left') {
+            handleDislike()
+        }
     }
 
     async function outOfFrame (name) {
@@ -150,7 +162,7 @@ export default function ProfileCard({setProfile}) {
                 {profileCards[currentIdx]}
             </div>
         </div>
-        <SwipeButtons handleLike={handleLike}/>
+        <SwipeButtons handleLike={handleLike} handleDislike={handleDislike}/>
         </>
     )
 }
