@@ -6,10 +6,10 @@
 
 ## Screenshots
 
-![App Image](public/images/spottr-login.png)
-![App Image](public/images/spottr-create-profile.png)
-![App Image](public/images/spottr-home.png)
-![App Image](public/images/spottr-profile-page.png)
+![App Image](public/Images/spottr-login.png)
+![App Image](public/Images/spottr-create-profile.png)
+![App Image](public/Images/spottr-home.png)
+![App Image](public/Images/spottr-profile-page.png)
 
 ## Getting Started
 
