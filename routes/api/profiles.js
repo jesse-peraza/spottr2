@@ -11,6 +11,7 @@ router.post('/photo-upload', upload.array('photo', 4), profilesCtrl.upload)
 router.post('/like', profilesCtrl.sendLike)
 router.post('/dislike', profilesCtrl.sendDislike)
 router.post ('/match/add', profilesCtrl.addMatch)
+router.get('/match', profilesCtrl.getMatches)
 
 // router.put('/edit', profilesCtrl.update)
 

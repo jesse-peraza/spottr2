@@ -35,6 +35,11 @@ export async function sendMatch (id) {
     return sendRequest(`${BASE_URL}/match/add`, 'POST', {id})
 }
 
+export async function getMatches () {
+    return sendRequest(`${BASE_URL}/match`)
+}
+
+
 // export function updateProfile(profileData) {
 //     return sendRequest(`${BASE_URL}/edit`, 'PUT', profileData)
 // }

@@ -9,7 +9,8 @@ module.exports = {
     displayProfiles,
     sendLike,
     sendDislike,
-    addMatch
+    addMatch,
+    getMatches
 }
 
 async function index (req, res) {
@@ -102,6 +103,17 @@ async function addMatch (req, res) {
         match.matches.push(profile._id)
         await match.save()
         res.json(profile)
+    } catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+}
+
+async function getMatches (req, res) {
+    try {
+        const profile = await Profile.findOne({user: req.user._id})
+        const matchesList = await Profile.find({_id: {$in: profile.matches}})
+        res.json(matchesList)
     } catch (err) {
         console.log(err)
         res.status(400).json(err)

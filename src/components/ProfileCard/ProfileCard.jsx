@@ -148,7 +148,7 @@ export default function ProfileCard({setProfile}) {
                     <p>{userProfile.fitnessStyle}</p>
                 </div>
                 <div className="level-div">
-                    <Typography variant="h4">fitnessLevel</Typography>
+                    <Typography variant="h4">Fitness Level</Typography>
                     <p>{userProfile.fitnessLevel}</p>
                 </div>
             </div>
