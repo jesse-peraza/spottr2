@@ -8,7 +8,6 @@ export default function HomePage({setProfile}) {
   return (
     <>
       <div>
-        <h1>HomePage</h1>
         <ProfileCard setProfile={setProfile}/>
       </div>
     </>
