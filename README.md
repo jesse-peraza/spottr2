@@ -13,7 +13,7 @@
 
 ## Getting Started
 
-Click [here]() to explore the application. You will need to sign up and create a profile to start connecting with other users. Create a profile that really describes yourself and your goals! Then get to swiping. You'll be able to see your matches on the right navigation pane and interact with your matches (chat feature will be developed soon). Hope you find your spotter!
+Click [here](https://spottr2-842d09486686.herokuapp.com/) to explore the application. You will need to sign up and create a profile to start connecting with other users. Create a profile that really describes yourself and your goals! Then get to swiping. You'll be able to see your matches on the right navigation pane and interact with your matches (chat feature will be developed soon). Hope you find your spotter!
 
 ## Technologies Used
 **Languages:** JavaScript, HTML, CSS, Node.js, Express.js, Mongoose, MongoDB, React, Tailwind CSS, AWS S3
